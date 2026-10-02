@@ -160,11 +160,11 @@ visitors %>%
 *Perform the same calculation for the 2021 admissions data.*
 
 ```{r Ex_h}
-#visitors %>% 
-#  ______(
-#    __________,
-#    __________
-#  )
+visitors %>% 
+  summarise( 
+    mean_2021 = mean(n_2021,na.rm =TRUE) ,
+    med_2021 = median(n_2021, na.rm = TRUE),
+  )
 ```
 
 All values in the output are `NA`!
@@ -175,11 +175,15 @@ All values in the output are `NA`!
 
 **Write your answer here**
 
+Non Answer
+
 ### Exercise j.
 
 *Look at the help pages for the `mean()` and `median()` commands to see what the input argument `na.rm` does. Edit your code from exercise h so that it computes the summary statistics where data is available.*
 
 **Write your answer here**
+
+It was because if it identifies an answer in the table as NA it will return NA so you have to make it ignore this fact by setting na.rm to true.
 
 ## Question 7
 
@@ -200,16 +204,18 @@ visitors %>%
 
 **Write your answer here**
 
+That means thare are some few very large places squewing the data making it larger.
+
 ## Question 8
 
 ### Exercise l.
 
 ```{r Q8}
-#visitors %>% 
-#  summarise(
-#     __________,
-#     __________,
-#  )
+visitors %>% 
+  summarise(
+     Max_2021 = max(n_2021,na.rm=TRUE),
+     Min_2021 = min(n_2021,na.rm=TRUE),
+  )
 ```
 
 ## Question 9
@@ -220,10 +226,10 @@ visitors %>%
 visitors_with_nations <- visitors %>%
   mutate(
     nation = case_when(
-      region == "Northern Ireland" ~ "Northern Ireland",
-      region == "Scotland" ~ "Scotland",
-      region == "Wales" ~ "Wales",
-      TRUE ~ "England"
+       region == "Northern Ireland" ~"Northern Ireland",
+       region == "Scotland" ~ "Scotland",
+       region == "Wales" ~ "Wales",
+       England = TRUE
     )
   )
 
